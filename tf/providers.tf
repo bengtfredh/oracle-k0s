@@ -1,5 +1,14 @@
 terraform {
   required_providers {
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+    }
+    helm = {
+      source = "hashicorp/helm"
+    }
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
     null = {
       source = "hashicorp/null"
     }
@@ -14,4 +23,28 @@ terraform {
     skip_metadata_api_check     = true
     force_path_style            = true
   }
+}
+
+provider "kubernetes" {
+  host                   = var.kubernetes_host
+  client_certificate     = base64decode(var.client_certificate)
+  client_key             = base64decode(var.client_key)
+  cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = var.kubernetes_host
+    client_certificate     = base64decode(var.client_certificate)
+    client_key             = base64decode(var.client_key)
+    cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
+  }
+}
+
+provider "kubectl" {
+  load_config_file       = false
+  host                   = var.kubernetes_host
+  client_certificate     = base64decode(var.client_certificate)
+  client_key             = base64decode(var.client_key)
+  cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
 }

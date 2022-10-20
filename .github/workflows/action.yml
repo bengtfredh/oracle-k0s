@@ -9,6 +9,10 @@ on:
 env:
   AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  TF_VAR_client_certificate: ${{ secrets. CLIENT_CERTIFICATE }}
+  TF_VAR_client_key: ${{ secrets.CLIENT_KEY }}
+  TF_VAR_cluster_ca_certificate: ${{ secrets.CLUSTER_CA_CERTIFICATE }}
+  TF_VAR_kubernetes_host: ${{ secrets.KUBERNETES_HOST }}
 
 jobs:
   build:
