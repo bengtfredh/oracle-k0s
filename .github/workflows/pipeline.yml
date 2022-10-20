@@ -1,0 +1,26 @@
+name: Build on Ubuntu
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Set up WireGuard
+        uses: bengtfredh/setup-wireguard@v2
+        with:
+          # Endpoint in the HOST:PORT format
+          endpoint: '${{ secrets.WG_ENDPOINT }}'
+          # Public key of the endpoint
+          endpoint_public_key: '${{ secrets.WG_PUBLICKEY }}'
+          # Comma-separated list of IP addresses
+          ips: '${{ secrets.WG_IPS }}'
+          # Comma-separated list of netmasks
+          allowed_ips: '${{ secrets.WG_ALLOWEDIPS }}'
+          # Private key
+          private_key: '${{ secrets.WG_PRIVATEKEY }}'
+          # Preshared key
+          #preshared_key: # optional
+      - name: Show wg status
+        run: sudo wg
