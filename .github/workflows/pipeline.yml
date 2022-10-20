@@ -23,4 +23,6 @@ jobs:
           # Preshared key
           #preshared_key: # optional
       - name: Show wg status
-        run: sudo wg
+        run: sudo wg;sudo ip r s
+      - name: Check endpoint
+        run: sudo ping -W 10 -c 10 -- '${{ secrets.WG_ENDPOINT_PRIVATE_IP }}'
