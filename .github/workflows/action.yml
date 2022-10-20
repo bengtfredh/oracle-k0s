@@ -35,6 +35,8 @@ jobs:
           private_key: '${{ secrets.WG_PRIVATEKEY }}'
           # Preshared key
           #preshared_key: # optional
+      - name: Show wg status
+        run: sudo wg;sudo ip r s
       - name: Terraform Init
         working-directory: ./tf
         id: init
