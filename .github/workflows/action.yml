@@ -31,8 +31,6 @@ jobs:
           private_key: '${{ secrets.WG_PRIVATEKEY }}'
           # Preshared key
           #preshared_key: # optional
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
         working-directory: ./tf
         id: init
