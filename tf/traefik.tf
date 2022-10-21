@@ -1,12 +1,12 @@
 resource "helm_release" "traefik" {
   depends_on = [helm_release.metallb]
-  name = "traefik"
-  namespace = "traefik"
+  name       = "traefik"
+  namespace  = "traefik"
 
-  repository = "https://helm.traefik.io/traefik"
-  chart      = "traefik"
+  repository       = "https://helm.traefik.io/traefik"
+  chart            = "traefik"
   create_namespace = true
-  version    = var.traefik_version
+  version          = "17.0.5"
 
   values = [<<-EOT
                  deployment:
