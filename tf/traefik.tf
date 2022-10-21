@@ -78,7 +78,7 @@ metadata:
   namespace: traefik
 type: Opaque
 data:
-  users: ZGFzaDokYXByMSQwakFVcXpIdiRCVjNVMXdPUWFsNVRVUVB4aDA3RnUuCgo=
+  users: ${traefik_dashboard_auth}
 YAML
 }
 

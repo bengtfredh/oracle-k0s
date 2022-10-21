@@ -13,6 +13,7 @@ env:
   TF_VAR_client_key: ${{ secrets.CLIENT_KEY }}
   TF_VAR_cluster_ca_certificate: ${{ secrets.CLUSTER_CA_CERTIFICATE }}
   TF_VAR_kubernetes_host: ${{ secrets.KUBERNETES_HOST }}
+  TF_VAR_traefik_dashboard_auth: ${{ TRAEFIK_DASHBOARD_AUTH }}
 
 jobs:
   build:
