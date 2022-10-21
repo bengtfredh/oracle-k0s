@@ -92,7 +92,7 @@ metadata:
   namespace: traefik
 spec:
   basicAuth:
-    secret: traefik-dashboard-auth
+    secret: ${var.traefik_dashboard_auth}
 YAML
 }
 
