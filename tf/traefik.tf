@@ -78,7 +78,7 @@ metadata:
   namespace: traefik
 type: Opaque
 data:
-  users: ${traefik_dashboard_auth}
+  users: ${var.traefik_dashboard_auth}
 YAML
 }
 
@@ -92,7 +92,7 @@ metadata:
   namespace: traefik
 spec:
   basicAuth:
-    secret: ${var.traefik_dashboard_auth}
+    secret: traefik-dashboard-auth
 YAML
 }
 
