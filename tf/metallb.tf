@@ -36,5 +36,10 @@ metadata:
 spec:
   ipAddressPools:
   - metallb-ipadresspool
+  nodeSelectors:
+  - matchLabels:
+      kubernetes.io/hostname: k0s-worker1
+  - matchLabels:
+      kubernetes.io/hostname: k0s-worker2
 YAML
 }
