@@ -7,6 +7,8 @@ resource "helm_release" "metallb" {
   create_namespace = true
   version          = var.metallb_version
 
+  wait = false
+
 }
 
 resource "kubectl_manifest" "metallb_ipadresspool" {
