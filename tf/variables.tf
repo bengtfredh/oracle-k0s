@@ -14,3 +14,10 @@ variable "kubernetes_host" {
 variable "traefik_dashboard_auth" {
   type = string
 }
+
+variable "metallb_version" {
+  type = string
+}
+variable "traefik_version" {
+  type = string
+}

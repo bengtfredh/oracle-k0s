@@ -5,7 +5,7 @@ resource "helm_release" "metallb" {
   chart            = "metallb"
   namespace        = "metallb-system"
   create_namespace = true
-  version          = "0.13.6"
+  version          = var.metallb_version
 
   reset_values = true
   force_update = true

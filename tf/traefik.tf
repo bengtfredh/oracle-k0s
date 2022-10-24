@@ -6,7 +6,7 @@ resource "helm_release" "traefik" {
   repository       = "https://helm.traefik.io/traefik"
   chart            = "traefik"
   create_namespace = true
-  version          = "17.0.5"
+  version          = var.traefik_version
 
   values = [<<-EOT
                  deployment:
