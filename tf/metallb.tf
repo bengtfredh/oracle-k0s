@@ -7,8 +7,6 @@ resource "helm_release" "metallb" {
   create_namespace = true
   version          = var.metallb_version
 
-  reset_values = true
-  force_update = true
 }
 
 resource "kubectl_manifest" "metallb_ipadresspool" {
