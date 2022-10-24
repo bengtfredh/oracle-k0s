@@ -36,8 +36,8 @@ jobs:
           private_key: '${{ secrets.WG_PRIVATEKEY }}'
           # Preshared key
           #preshared_key: # optional
-      - name: Show wg status
-        run: sudo wg;sudo ip r s
+      - name: Check wg up
+        run: ping -c 3 '${{ secrets.PING_TEST_IP }}'
       - name: Terraform Init
         working-directory: ./tf
         id: init
