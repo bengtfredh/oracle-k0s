@@ -10,7 +10,7 @@ resource "helm_release" "traefik" {
 
   values = [<<-EOT
                  deployment:
-                   replicas: 2
+                   replicas: 3
                  podDisruptionBudget:
                    enabled: true
                    minAvailable: 1
@@ -47,7 +47,7 @@ resource "helm_release" "traefik" {
                  hostNetwork: true
                  affinity:
                    podAntiAffinity:
-                     preferredDuringSchedulingIgnoredDuringExecution:
+                     requiredDuringSchedulingIgnoredDuringExecution:
                      - weight: 100
                        podAffinityTerm:
                          labelSelector:
