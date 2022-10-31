@@ -25,14 +25,6 @@ resource "helm_release" "traefik" {
                  ports:
                    web:
                      redirectTo: websecure
-                   websecure:
-                     tls:
-                       enabled: true
-                   ssh:
-                     port: 2222
-                     expose: true
-                     exposedPort: 22
-                     protocol: TCP
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
