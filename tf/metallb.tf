@@ -19,7 +19,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 10.234.234.55-10.234.234.66
+  - 10.234.234.8/30
 YAML
 }
 
