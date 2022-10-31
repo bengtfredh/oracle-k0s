@@ -47,7 +47,7 @@ resource "helm_release" "traefik" {
                  hostNetwork: true
                  affinity:
                    podAntiAffinity:
-                     requiredDuringSchedulingIgnoredDuringExecution:
+                     preferredDuringSchedulingIgnoredDuringExecution:
                      - weight: 100
                        podAffinityTerm:
                          labelSelector:
