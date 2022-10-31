@@ -22,9 +22,11 @@ resource "helm_release" "traefik" {
                    - "--global.sendanonymoususage=false"
                  ports:
                    web:
+                     port: 80
                      hostPort: 80
                      redirectTo: websecure
                    websecure:
+                     port: 443
                      hostPort: 443
                  tlsOptions:
                    default:
