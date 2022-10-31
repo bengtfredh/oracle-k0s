@@ -10,7 +10,7 @@ resource "helm_release" "traefik" {
 
   values = [<<-EOT
                  deployment:
-                   replicas: 3
+                   replicas: 2
                  podDisruptionBudget:
                    enabled: true
                    minAvailable: 1
@@ -22,7 +22,10 @@ resource "helm_release" "traefik" {
                    - "--global.sendanonymoususage=false"
                  ports:
                    web:
+                     hostPort: 80
                      redirectTo: websecure
+                   websecure:
+                     hostPort: 443
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
