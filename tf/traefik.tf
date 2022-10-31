@@ -41,6 +41,7 @@ resource "helm_release" "traefik" {
                    default:
                      defaultCertificate:
                        secretName: fredhs-net-cert
+                 hostNetwork: true
                  affinity:
                    podAntiAffinity:
                      preferredDuringSchedulingIgnoredDuringExecution:
