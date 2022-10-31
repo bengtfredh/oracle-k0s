@@ -10,7 +10,7 @@ resource "helm_release" "traefik" {
 
   values = [<<-EOT
                  deployment:
-                   replicas: 2
+                   replicas: 3
                    imagePullSecrets:
                      - name: dockerhub
                  podDisruptionBudget:

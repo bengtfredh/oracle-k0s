@@ -7,8 +7,6 @@ resource "helm_release" "metallb" {
   create_namespace = true
   version          = var.metallb_version
 
-  wait = false
-
 }
 
 resource "kubectl_manifest" "metallb_ipadresspool" {
@@ -21,7 +19,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 10.0.255.55-10.0.255.66
+  - 10.234.234.55-10.234.234.66
 YAML
 }
 
