@@ -22,10 +22,7 @@ resource "helm_release" "traefik" {
                    - "--global.sendanonymoususage=false"
                  ports:
                    web:
-                     hostPort: 8000
                      redirectTo: websecure
-                   websecure:
-                     hostPort: 8443
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
@@ -44,7 +41,6 @@ resource "helm_release" "traefik" {
                    default:
                      defaultCertificate:
                        secretName: fredhs-net-cert
-                 hostNetwork: true
                  affinity:
                    podAntiAffinity:
                      preferredDuringSchedulingIgnoredDuringExecution:
