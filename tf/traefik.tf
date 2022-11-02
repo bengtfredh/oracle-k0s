@@ -112,7 +112,7 @@ YAML
 }
 
 resource "helm_release" "traefik_hub" {
-  name = "traefik-hub"
+  name = "hub-agent"
 
   repository       = "https://helm.traefik.io/hub"
   chart            = "hub-agent"
