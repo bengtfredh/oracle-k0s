@@ -10,6 +10,9 @@ variable "cluster_ca_certificate" {
 variable "kubernetes_host" {
   type = string
 }
+variable "traefik_hub_token" {
+  type = string
+}
 
 variable "traefik_dashboard_auth" {
   type = string

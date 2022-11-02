@@ -14,6 +14,7 @@ env:
   TF_VAR_cluster_ca_certificate: ${{ secrets.CLUSTER_CA_CERTIFICATE }}
   TF_VAR_kubernetes_host: ${{ secrets.KUBERNETES_HOST }}
   TF_VAR_traefik_dashboard_auth: ${{ secrets.TRAEFIK_DASHBOARD_AUTH }}
+  TF_VAR_traefik_hub_token: ${{ secrets.TRAEFIK_HUB_TOKEN }}
 
 jobs:
   build:
