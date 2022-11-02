@@ -23,8 +23,8 @@ resource "helm_release" "traefik" {
                    - "--global.checknewversion=false"
                    - "--global.sendanonymoususage=false"
                  ports:
-                   web: null
-                   websecure: null
+                   web:
+                     redirectTo: websecure
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
