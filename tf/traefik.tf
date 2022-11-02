@@ -9,6 +9,8 @@ resource "helm_release" "traefik" {
   version          = var.traefik_version
 
   values = [<<-EOT
+                 hub:
+                   enabled: true
                  deployment:
                    replicas: 3
                  podDisruptionBudget:
@@ -21,8 +23,8 @@ resource "helm_release" "traefik" {
                    - "--global.checknewversion=false"
                    - "--global.sendanonymoususage=false"
                  ports:
-                   web:
-                     redirectTo: websecure
+                   web: none
+                   websecure: none
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
