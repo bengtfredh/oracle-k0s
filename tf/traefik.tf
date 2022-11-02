@@ -1,5 +1,5 @@
 resource "helm_release" "traefik" {
-  depends_on = [helm_release.metallb]
+  #depends_on = [helm_release.metallb]
   name       = "traefik"
   namespace  = "traefik"
 
