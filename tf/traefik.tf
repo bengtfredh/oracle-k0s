@@ -24,9 +24,7 @@ resource "helm_release" "traefik" {
                    - "--global.sendanonymoususage=false"
                  ports:
                    web:
-                     expose: false
-                   websecure:
-                     expose: false
+                     redirectTo: websecure
                  tlsOptions:
                    default:
                      minVersion: VersionTLS12
