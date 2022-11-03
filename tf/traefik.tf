@@ -11,6 +11,31 @@ resource "helm_release" "traefik" {
     value = "true"
   }
 
+  set {
+    name  = "ports.web"
+    value = "null"
+  }
+
+  set {
+    name  = "ports.websecure"
+    value = "null"
+  }
+
+  set {
+    name  = "ports.metrics.expose"
+    value = "true"
+  }
+
+  set {
+    name  = "service.type"
+    value = "ClusterIP"
+  }
+
+  set {
+    name  = "fullnameOverride"
+    value = "traefik-hub"
+  }
+
 }
 
 resource "helm_release" "traefik_hub" {
