@@ -1,3 +1,18 @@
+resource "helm_release" "traefik" {
+  name = "traefik"
+
+  repository       = "https://helm.traefik.io/traefik"
+  chart            = "traefik"
+  namespace        = "hub-agent"
+  create_namespace = true
+
+  set {
+    name  = "hub.enabled"
+    value = "true"
+  }
+
+}
+
 resource "helm_release" "traefik_hub" {
   name = "hub-agent"
 
