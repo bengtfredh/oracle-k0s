@@ -31,11 +31,6 @@ resource "helm_release" "traefik" {
     value = "ClusterIP"
   }
 
-  set {
-    name  = "fullnameOverride"
-    value = "traefik-hub"
-  }
-
 }
 
 resource "helm_release" "traefik_hub" {
