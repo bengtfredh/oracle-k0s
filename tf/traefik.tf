@@ -35,8 +35,9 @@ resource "helm_release" "traefik" {
 }
 
 resource "helm_release" "traefik-hub" {
-  name      = "hub-agent"
-  namespace = "hub-agent"
+  depends_on = [helm_release.traefik]
+  name       = "hub-agent"
+  namespace  = "hub-agent"
 
   repository       = "https://helm.traefik.io/hub"
   chart            = "hub-agent"
