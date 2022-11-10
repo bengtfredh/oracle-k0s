@@ -42,12 +42,8 @@ resource "helm_release" "kubernetes-dashboard" {
   }
 
   set {
-    name  = "protocolHttp"
+    name  = "ingress.enabled"
     value = "true"
   }
 
-  set {
-    name  = "service.externalPort"
-    value = "80"
-  }
 }
