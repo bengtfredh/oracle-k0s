@@ -35,11 +35,11 @@ resource "helm_release" "kubernetes-dashboard" {
                        annotations:
                          kubernetes.io/service-account.name: admin-user
                      type: kubernetes.io/service-account-token
-                 ingress:
-                   enabled: true
-                   hosts:
-                     - oracle-dash.cxyqwerty.net
-                     - interesting-ape-nxx9wk.xve0frly.traefikhub.io
+                 extraArgs:
+                   - --enable-insecure-login
+                 protocolHttp: true
+                 service:
+                   externalPort: 80
             EOT
   ]
 
