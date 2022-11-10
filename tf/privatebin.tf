@@ -20,9 +20,4 @@ resource "helm_release" "privatebin" {
             EOT
   ]
 
-  set {
-    name  = "controller.kind"
-    value = "StatefulSet"
-  }
-
 }
