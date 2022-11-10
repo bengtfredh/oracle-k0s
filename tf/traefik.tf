@@ -17,6 +17,8 @@ resource "helm_release" "traefik" {
                    kubernetesIngress:
                      allowExternalNameServices: true
                  ports:
+                   traefik:
+                     expose: true
                    web: null
                    websecure: null
                    metrics:
