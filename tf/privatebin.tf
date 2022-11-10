@@ -7,6 +7,9 @@ resource "helm_release" "privatebin" {
   create_namespace = true
 
   values = [<<-EOT
+                 controller:
+                   pvc:
+                     storageClass: openebs-hostpath
                  configs:
                    conf.php: |-
                      [model]
