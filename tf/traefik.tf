@@ -1,111 +1,49 @@
 resource "helm_release" "traefik" {
-  depends_on = [helm_release.metallb]
-  name       = "traefik"
-  namespace  = "traefik"
+  name      = "traefik"
+  namespace = "hub-agent"
 
   repository       = "https://helm.traefik.io/traefik"
   chart            = "traefik"
   create_namespace = true
-  version          = var.traefik_version
 
   values = [<<-EOT
-                 deployment:
-                   replicas: 3
-                 podDisruptionBudget:
-                   enabled: true
-                   minAvailable: 1
+                 additionalArguments:
+                 - --experimental.hub
+                 - --hub
+                 metrics:
+                   prometheus:
+                     addRoutersLabels: true
                  providers:
                    kubernetesIngress:
-                     enabled: false
-                 globalArguments:
-                   - "--global.checknewversion=false"
-                   - "--global.sendanonymoususage=false"
+                     allowExternalNameServices: true
                  ports:
-                   web:
-                     redirectTo: websecure
-                 tlsOptions:
-                   default:
-                     minVersion: VersionTLS12
-                     cipherSuites:
-                       - TLS_AES_256_GCM_SHA384
-                       - TLS_CHACHA20_POLY1305_SHA256
-                       - TLS_AES_128_GCM_SHA256
-                       - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
-                       - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
-                       - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-                       - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
-                       - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-                       - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-                       - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
-                 tlsStore:
-                   default:
-                     defaultCertificate:
-                       secretName: fredhs-net-cert
-                 affinity:
-                   podAntiAffinity:
-                     preferredDuringSchedulingIgnoredDuringExecution:
-                     - weight: 100
-                       podAffinityTerm:
-                         labelSelector:
-                           matchExpressions:
-                           - key: app.kubernetes.io/name
-                             operator: In
-                             values:
-                             - traefik
-                         topologyKey: topology.kubernetes.io/hostname
+                   web: null
+                   websecure: null
+                   metrics:
+                     expose: true
+                   traefikhub-tunl:
+                     port: 9901
+                     expose: true
+                     exposedPort: 9901
+                     protocol: TCP
+                 service:
+                   type: ClusterIP
+                 fullnameOverride: traefik-hub
             EOT
   ]
 
 }
 
-resource "kubectl_manifest" "traefik_dashboard_auth" {
-  depends_on = [helm_release.traefik]
-  yaml_body  = <<YAML
-apiVersion: v1
-kind: Secret
-metadata:
-  name: traefik-dashboard-auth
-  namespace: traefik
-type: Opaque
-data:
-  users: ${var.traefik_dashboard_auth}
-YAML
-}
+resource "helm_release" "traefik-hub" {
+  name      = "hub-agent"
+  namespace = "hub-agent"
 
-resource "kubectl_manifest" "traefik_dashboard_middleware" {
-  depends_on = [helm_release.traefik]
-  yaml_body  = <<YAML
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: traefik-dashboard-basicauth
-  namespace: traefik
-spec:
-  basicAuth:
-    secret: traefik-dashboard-auth
-YAML
-}
+  repository       = "https://helm.traefik.io/hub"
+  chart            = "hub-agent"
+  create_namespace = true
 
-resource "kubectl_manifest" "traefik_dashboard_ingressroute" {
-  depends_on = [helm_release.traefik]
-  yaml_body  = <<YAML
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard
-  namespace: traefik
-spec:
-  entryPoints:
-  - websecure
-  routes:
-  - kind: Rule
-    match: Host(`oracle-k0s-traefik.fredhs.net`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
-    middlewares:
-    - name: traefik-dashboard-basicauth
-      namespace: traefik
-    services:
-    - kind: TraefikService
-      name: api@internal
-YAML
+  set {
+    name  = "token"
+    value = "edf1d584-59e2-4a14-8388-3156ef15b355"
+  }
 }
-
