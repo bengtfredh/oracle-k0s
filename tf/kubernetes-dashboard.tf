@@ -7,6 +7,8 @@ resource "helm_release" "kubernetes-dashboard" {
   create_namespace = true
 
   values = [<<-EOT
+                 metricsScraper:
+                   enabled: true
                  extraManifests:
                    - apiVersion: v1
                      kind: ServiceAccount
@@ -33,17 +35,12 @@ resource "helm_release" "kubernetes-dashboard" {
                        annotations:
                          kubernetes.io/service-account.name: admin-user
                      type: kubernetes.io/service-account-token
+                 ingress:
+                   enabled: true
+                   hosts:
+                     - oracle-dash.cxyqwerty.net
+                     - colossal-xerinae-nxx9wk.xve0frly.traefikhub.io
             EOT
   ]
-
-  set {
-    name  = "metricsScraper.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "ingress.enabled"
-    value = "true"
-  }
 
 }
