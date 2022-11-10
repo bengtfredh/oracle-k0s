@@ -47,6 +47,6 @@ resource "helm_release" "traefik-hub" {
 
   set {
     name  = "token"
-    value = "edf1d584-59e2-4a14-8388-3156ef15b355"
+    value = ${var.traefik_hub_token}
   }
 }

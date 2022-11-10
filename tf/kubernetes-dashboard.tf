@@ -40,4 +40,14 @@ resource "helm_release" "kubernetes-dashboard" {
     name  = "metricsScraper.enabled"
     value = "true"
   }
+
+  set {
+    name  = "protocolHttp"
+    value = "true"
+  }
+
+  set {
+    name  = "service.externalPort"
+    value = "80"
+  }
 }
