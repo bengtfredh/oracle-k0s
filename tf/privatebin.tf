@@ -8,6 +8,7 @@ resource "helm_release" "privatebin" {
 
   values = [<<-EOT
                  controller:
+                   kind: StatefulSet
                    pvc:
                      storageClass: openebs-hostpath
                  configs:
