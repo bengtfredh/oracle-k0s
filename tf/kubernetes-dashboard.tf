@@ -39,7 +39,7 @@ resource "helm_release" "kubernetes-dashboard" {
                    enabled: true
                    hosts:
                      - oracle-dash.cxyqwerty.net
-                     - colossal-xerinae-nxx9wk.xve0frly.traefikhub.io
+                     - interesting-ape-nxx9wk.xve0frly.traefikhub.io
             EOT
   ]
 
